@@ -11,7 +11,7 @@ function App() {
   const [error, setError] = useState("");
 
   const loadStudents = () => {
-    axios.get("http://localhost:5000/students").then((response) => {
+    axios.get("https://final-practical-exam-adv web.vercel.app/students").then((response) => {
       setStudents(response.data);
     });
   };
@@ -39,14 +39,14 @@ function App() {
 
   if (editId) {
     axios
-      .put(`http://localhost:5000/students/${editId}`, { name, course, age })
+      .put(`https://final-practical-exam-adv web.vercel.app/students/${editId}`, { name, course, age })
       .then(() => {
         loadStudents();
         clearForm();
       });
   } else {
     axios
-      .post("http://localhost:5000/students", { name, course, age })
+      .post("https://final-practical-exam-adv web.vercel.app/students", { name, course, age })
       .then(() => {
         loadStudents();
         clearForm();
@@ -55,7 +55,7 @@ function App() {
 };
 
   const deleteStudent = (id) => {
-    axios.delete(`http://localhost:5000/students/${id}`).then(() => {
+    axios.delete(`https://final-practical-exam-adv web.vercel.app/students/${id}`).then(() => {
       loadStudents();
     });
   };
