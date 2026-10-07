@@ -1,7 +1,6 @@
-
 const express = require("express");
-const cors = require("cors")
-const mongoose = require("mongoose")
+const cors = require("cors");
+const mongoose = require("mongoose");
 const app = express();
 const Student = require("./models/Student");
 
@@ -11,26 +10,21 @@ app.use(cors());
 app.use(express.json());
 
 mongoose
-    .connect(process.env.MONGO_URI)
-    .then(() => {
-        console.log("Connected to MONGODB")
-    })
-    .catch((error) => {
-        console.log("MONGODB connection error:", error)
-    })
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("Connected to MONGODB");
+  })
+  .catch((error) => {
+    console.log("MONGODB connection error:", error);
+  });
 
-app.get("/", (req,res) => {
-    res.send("Server is running");
+app.get("/", (req, res) => {
+  res.send("Server is running");
 });
 
-app.listen(5000, () =>{
-    console.log("Server running on port 5000")
-})
-
-app.get("/students", async (req,res) => {
-   const students = await Student.find();
-   
-    res.json(students);
+app.get("/students", async (req, res) => {
+  const students = await Student.find();
+  res.json(students);
 });
 
 app.post("/students", async (req, res) => {
@@ -50,3 +44,11 @@ app.put("/students/:id", async (req, res) => {
   });
   res.json(student);
 });
+
+if (process.env.NODE_ENV !== "production") {
+  app.listen(5000, () => {
+    console.log("Server running on port 5000");
+  });
+}
+
+module.exports = app;
